@@ -1,0 +1,11 @@
+--- a/arch/loongarch/Makefile
++++ b/arch/loongarch/Makefile
+@@ -197,7 +197,7 @@
+ 
+ vmlinuz.efi: vmlinux.efi
+ 
+-vmlinux.elf vmlinux.efi vmlinuz.efi uImage: vmlinux
++vmlinux.elf vmlinux.efi vmlinuz.efi uImage uImage.gz: vmlinux
+ 	$(Q)$(MAKE) $(build)=$(boot) $(bootvars-y) $(boot)/$@
+ 
+ install:

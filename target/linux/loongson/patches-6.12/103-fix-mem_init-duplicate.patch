@@ -1,0 +1,18 @@
+--- a/arch/loongarch/kernel/numa.c
++++ b/arch/loongarch/kernel/numa.c
+@@ -262,10 +262,10 @@
+ 
+ #endif
+ 
+-void __init mem_init(void)
+-{
+-	high_memory = (void *) __va(max_low_pfn << PAGE_SHIFT);
+-	memblock_free_all();
+-}
++// void __init mem_init(void)
++// {
++// 	high_memory = (void *) __va(max_low_pfn << PAGE_SHIFT);
++// 	memblock_free_all();
++// }
+ 
+ int pcibus_to_node(struct pci_bus *bus)

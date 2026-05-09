@@ -1,0 +1,52 @@
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-loongson.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-loongson.c
+@@ -512,10 +512,12 @@
+ 
+ static int loongson_dwmac_fix_reset(void *priv, void __iomem *ioaddr)
+ {
++	struct stmmac_priv *stmmac_priv = priv;
++
+ 	u32 value = readl(ioaddr + DMA_BUS_MODE);
+ 
+ 	if (value & DMA_BUS_MODE_SFT_RESET) {
+-		netdev_err(priv->dev, "the PHY clock is missing\n");
++		netdev_err(stmmac_priv->dev, "the PHY clock is missing\n");
+ 		return -EINVAL;
+ 	}
+ 
+@@ -529,6 +531,7 @@
+ 				  10000, 2000000);
+ }
+ 
++#if 0
+ static int loongson_dwmac_suspend(struct device *dev, void *bsp_priv)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
+@@ -578,6 +581,7 @@
+ 
+ 	return 0;
+ }
++#endif
+ 
+ static int loongson_dwmac_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ {
+@@ -609,8 +613,8 @@
+ 	plat->bsp_priv = ld;
+ 	plat->setup = loongson_dwmac_setup;
+ 	plat->fix_soc_reset = loongson_dwmac_fix_reset;
+-	plat->suspend = loongson_dwmac_suspend;
+-	plat->resume = loongson_dwmac_resume;
++	// plat->suspend = loongson_dwmac_suspend;
++	// plat->resume = loongson_dwmac_resume;
+ 
+ 	ld->dev = &pdev->dev;
+ 
+@@ -682,7 +686,7 @@
+ 	.probe = loongson_dwmac_probe,
+ 	.remove = loongson_dwmac_remove,
+ 	.driver = {
+-		.pm = &stmmac_simple_pm_ops,
++		// .pm = &stmmac_simple_pm_ops,
+ 	},
+ };
+ 
