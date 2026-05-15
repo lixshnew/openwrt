@@ -10,6 +10,11 @@ define Build/Compile
 endef
 
 ### Image scripts ###
+define Image/Prepare
+	mkdir -p $(TARGET_DIR)/boot
+	cp $(KDIR)/uImage.gz $(TARGET_DIR)/boot/uImage
+endef
+
 ##	$(CP) $(DTS_DIR)/$(DEVICE_DTS).dtb $@.boot/rockchip.dtb
 define Build/boot-common
 	# This creates a new folder copies the dtb (as rockchip.dtb) 
